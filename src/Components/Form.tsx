@@ -21,7 +21,7 @@ const Form = () => {
     { value: "2", label: "2" },
   ];
 
-  const [date, setDate] = useState<any>(new Date());
+  // const [date, setDate] = useState<Date>(new Date());
 
   return (
     <div>

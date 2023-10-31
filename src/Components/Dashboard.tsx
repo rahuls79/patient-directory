@@ -9,12 +9,17 @@ import {
 } from "react-router-dom";
 import AddPatient from "./AddPatient";
 import { useRef, useContext } from "react";
+import SearchPatient from "./SearchPatient";
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
   const AddPatientPageHandler = () => {
     navigate("Dashboard/Add-Patient");
+  };
+
+  const SearchPatientPageHandler = () => {
+    navigate("Dashboard/Search-Patient");
   };
 
   return (
@@ -32,7 +37,12 @@ const Dashboard = () => {
           <p id="navigation-option-selector">Edit Patient</p>
         </div>
         <div className="navigation-option">
-          <p id="navigation-option-selector">Search Patient</p>
+          <p
+            id="navigation-option-selector"
+            onClick={() => SearchPatientPageHandler()}
+          >
+            Search Patient
+          </p>
         </div>
         <div className="navigation-option">
           <p id="navigation-option-selector">Select Spreadsheet</p>
@@ -42,6 +52,10 @@ const Dashboard = () => {
         <Routes>
           <Route path="/Dashboard" element="" />
           <Route path="Dashboard/Add-Patient/*" element={<AddPatient />} />
+          <Route
+            path="/Dashboard/Search-Patient/*"
+            element={<SearchPatient />}
+          />
         </Routes>
       </div>
     </div>
