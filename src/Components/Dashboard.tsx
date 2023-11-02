@@ -10,6 +10,7 @@ import {
 import AddPatient from "./AddPatient";
 import { useRef, useContext } from "react";
 import SearchPatient from "./SearchPatient";
+import EditPatient from "./EditPatient";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -20,6 +21,10 @@ const Dashboard = () => {
 
   const SearchPatientPageHandler = () => {
     navigate("Dashboard/Search-Patient");
+  };
+
+  const EditPatientPageHandler = () => {
+    navigate("Dashboard/Edit-Patient");
   };
 
   return (
@@ -34,7 +39,12 @@ const Dashboard = () => {
           </p>
         </div>
         <div className="navigation-option">
-          <p id="navigation-option-selector">Edit Patient</p>
+          <p
+            id="navigation-option-selector"
+            onClick={() => EditPatientPageHandler()}
+          >
+            Edit Patient
+          </p>
         </div>
         <div className="navigation-option">
           <p
@@ -52,6 +62,7 @@ const Dashboard = () => {
         <Routes>
           <Route path="/Dashboard" element="" />
           <Route path="Dashboard/Add-Patient/*" element={<AddPatient />} />
+          <Route path="/Dashboard/Edit-Patient/*" element={<EditPatient />} />
           <Route
             path="/Dashboard/Search-Patient/*"
             element={<SearchPatient />}
