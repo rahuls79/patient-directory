@@ -10,34 +10,9 @@ import "react-datepicker/dist/react-datepicker.css";
 // import Dropdown from "react-bootstrap/Dropdown";
 import Select from "react-select";
 import dayjs from "dayjs";
+import { FormsProps } from "./types";
 
-interface searchPatientProps {
-  displayDetails: User;
-  setDisplayDetails: (displayDetails: User) => void;
-}
-
-interface User {
-  ID: string;
-  NAME: string;
-  City: string;
-  Sex: string;
-  Age: string;
-  PhoneNumber: string;
-  Address: string;
-  Prescription: string;
-  Dose: string;
-  VisitDate: string;
-  NextVisit: string;
-  PhyID: string;
-  PhyName: string;
-  PhyPhone: string;
-  Bill: string;
-}
-
-const Form = (
-  { displayDetails }: searchPatientProps,
-  { setDisplayDetails }: searchPatientProps
-) => {
+const SearchForm = ({ displayDetails, setDisplayDetails }: FormsProps) => {
   const options = [
     { value: "Male", label: "Male" },
     { value: "Female", label: "Female" },
@@ -57,34 +32,50 @@ const Form = (
         <div className="form1-toprow">
           <div className="input-wrapper">
             <label htmlFor="pId">Patient ID</label>
-            <input id="pId" value={displayDetails.ID}></input>
+            <input readOnly={true} id="pId" value={displayDetails.ID}></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="name">Full Name</label>
-            <input id="name" value={displayDetails.NAME}></input>
+            <input
+              readOnly={true}
+              id="name"
+              value={displayDetails.NAME}
+            ></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="city">City</label>
-            <input id="city" value={displayDetails.City}></input>
+            <input
+              readOnly={true}
+              id="city"
+              value={displayDetails.City}
+            ></input>
           </div>
         </div>
         <br />
         <div className="form1-bottomrow">
           <div className="input-wrapper">
             <label htmlFor="sex">Sex</label>
-            <Select id="sex" value={displayDetails.Sex} />
+            <input readOnly={true} id="sex" value={displayDetails.Sex} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="age">Age</label>
-            <Select id="age" value={displayDetails.Age} />
+            <input readOnly={true} id="age" value={displayDetails.Age} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="phone">Phone</label>
-            <input id="phone" value={displayDetails.PhoneNumber}></input>
+            <input
+              readOnly={true}
+              id="phone"
+              value={displayDetails.PhoneNumber}
+            ></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="address">Address</label>
-            <input id="address" value={displayDetails.Address}></input>
+            <input
+              readOnly={true}
+              id="address"
+              value={displayDetails.Address}
+            ></input>
           </div>
         </div>
       </div>
@@ -93,11 +84,19 @@ const Form = (
         <div className="form2-toprow">
           <div className="input-wrapper">
             <label htmlFor="pres">Prescription</label>
-            <input id="pres" value={displayDetails.Prescription}></input>
+            <input
+              readOnly={true}
+              id="pres"
+              value={displayDetails.Prescription}
+            ></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="dose">Dose</label>
-            <input id="dose" value={displayDetails.Dose}></input>
+            <input
+              readOnly={true}
+              id="dose"
+              value={displayDetails.Dose}
+            ></input>
           </div>
         </div>
         <br />
@@ -106,7 +105,10 @@ const Form = (
             <label htmlFor="visitD">Visit Date</label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DatePicker"]}>
-                <DatePicker defaultValue={dayjs(displayDetails.VisitDate)} />
+                <DatePicker
+                  readOnly={true}
+                  value={dayjs(displayDetails.VisitDate)}
+                />
               </DemoContainer>
             </LocalizationProvider>
           </div>
@@ -114,7 +116,10 @@ const Form = (
             <label htmlFor="nvisit">Next Visit</label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DatePicker"]}>
-                <DatePicker defaultValue={dayjs(displayDetails.NextVisit)} />
+                <DatePicker
+                  readOnly={true}
+                  value={dayjs(displayDetails.NextVisit)}
+                />
               </DemoContainer>
             </LocalizationProvider>
           </div>
@@ -125,22 +130,38 @@ const Form = (
         <div className="form3-toprow">
           <div className="input-wrapper">
             <label htmlFor="phyID">Physician ID</label>
-            <input id="phyID" value={displayDetails.PhyID}></input>
+            <input
+              readOnly={true}
+              id="phyID"
+              value={displayDetails.PhyID}
+            ></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="phyName">Physician Name</label>
-            <input id="phyName" value={displayDetails.PhyName}></input>
+            <input
+              readOnly={true}
+              id="phyName"
+              value={displayDetails.PhyName}
+            ></input>
           </div>
         </div>
         <br />
         <div className="form3-bottomrow">
           <div className="input-wrapper">
             <label htmlFor="phyPhone">Phone Number</label>
-            <input id="phyPhone" value={displayDetails.PhyPhone}></input>
+            <input
+              readOnly={true}
+              id="phyPhone"
+              value={displayDetails.PhyPhone}
+            ></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="bill">Bill</label>
-            <input id="bill" value={displayDetails.Bill}></input>
+            <input
+              readOnly={true}
+              id="bill"
+              value={displayDetails.Bill}
+            ></input>
           </div>
         </div>
       </div>
@@ -148,4 +169,4 @@ const Form = (
   );
 };
 
-export default Form;
+export default SearchForm;

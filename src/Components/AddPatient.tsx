@@ -20,8 +20,10 @@ const AddPatient = () => {
   ];
 
   const ageOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
+    { value: "1-20", label: "1-20" },
+    { value: "21-40", label: "21-40" },
+    { value: "41-60", label: "41-60" },
+    { value: "60+", label: "60+" },
   ];
 
   // const [date, setDate] = useState<Date>(new Date());

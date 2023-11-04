@@ -1,38 +1,24 @@
 import "./SearchResultList.css";
 import { SearchResult } from "./SearchResult";
 import React from "react";
-
-interface searchPatientProps {
-  results: Array<Patient>;
-}
-
-interface Patient {
-  ID: string;
-  NAME: string;
-  City: string;
-  Sex: string;
-  Age: string;
-  PhoneNumber: string;
-  Address: string;
-  Prescription: string;
-  Dose: string;
-  VisitDate: string;
-  NextVisit: string;
-  PhyID: string;
-  PhyName: string;
-  PhyPhone: string;
-  Bill: string;
-}
+import { searchPatientProps } from "./types";
 
 export const SearchResultList = ({ results }: searchPatientProps) => {
+  const onSelectPatientHandler = (patientId: string) => {
+    const customEvent = new CustomEvent("on-patient-select", {
+      detail: patientId,
+    });
+    document.dispatchEvent(customEvent);
+  };
+
   return (
     <div className="results-list">
-      {results.map((result, id) => {
+      {results.map((result) => {
         return (
           <div
-            key={id}
+            key={result.ID}
             className="search-result"
-            onClick={(e) => alert(`You selected ${result.NAME}!`)}
+            onClick={() => onSelectPatientHandler(result.ID)}
           >
             {result.NAME} || {result.ID}
           </div>

@@ -1,37 +1,45 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
+import Form from "./SearchForm";
 import "./SearchPatient.css";
 import Select from "react-select";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import Dropdown from "react-bootstrap/Dropdown";
-// import Select from "react-select";
-import dayjs from "dayjs";
+
 import { SearchResultList } from "./SearchResultList";
+import { isCustomEvent, searchPatientProps, Patient } from "./types";
+import SearchForm from "./SearchForm";
 
 const SearchPatient = () => {
   const [searchKey, setSearchKey] = useState("");
-  const [result, setResult] = useState([]);
-  const [displayDetails, setDisplayDetails] = useState({
-    ID: "",
-    NAME: "",
-    City: "",
-    Sex: "",
-    Age: "",
-    PhoneNumber: "",
-    Address: "",
-    Prescription: "",
-    Dose: "",
-    VisitDate: "",
-    NextVisit: "",
-    PhyID: "",
-    PhyName: "",
-    PhyPhone: "",
-    Bill: "",
-  });
+  const [result, setResult] = useState<Array<Patient>>([]);
+
+  const [displayDetails, setDisplayDetails] = useState<Patient>();
+
+  useEffect(() => {
+    const getPatientById = (patientId: string) => {
+      console.log(result, "resultLog");
+      const patient = result.find((user: Patient) => user.ID === patientId);
+
+      console.log(patient, "getpatientByID");
+      return patient;
+    };
+
+    const onPatientSelectListener = (e: Event) => {
+      if (isCustomEvent(e)) {
+        const pId = e.detail;
+        const patient = getPatientById(pId);
+        setDisplayDetails(patient);
+        console.log(pId);
+      }
+    };
+    document.addEventListener("on-patient-select", onPatientSelectListener);
+
+    return () => {
+      document.removeEventListener(
+        "on-patient-select",
+        onPatientSelectListener
+      );
+    };
+  }, [result]);
 
   // const Options = [
   //   { value: {displayDetails[0].ID}, label: "1" },
@@ -47,15 +55,18 @@ const SearchPatient = () => {
     fetch(
       "https://sheet.best/api/sheets/b630797f-ed28-4de1-ac93-0b71f665e9c7/" +
         "query?NAME=" +
-        value
+        value,
+      {
+        method: "GET",
+      }
     )
       .then((response) => response.json())
       .then((json) => {
-        const result = json.filter((user: any) => {
+        const result: Array<Patient> = json.filter((user: Patient) => {
           return value && user && user.NAME && user.NAME.includes(value);
         });
         setResult(result);
-        console.log(result);
+        console.log(result, "insidefetch");
       });
   };
 
@@ -72,10 +83,12 @@ const SearchPatient = () => {
       </div>
       {result && result.length > 0 && <SearchResultList results={result} />}
       <br /> <br />
-      <Form
-        displayDetails={displayDetails}
-        setDisplayDetails={setDisplayDetails}
-      />
+      {displayDetails && (
+        <SearchForm
+          displayDetails={displayDetails}
+          setDisplayDetails={setDisplayDetails}
+        />
+      )}
       {/* <ul>
         {displayDetails.map((data: any) => (
           <li key={data.ID}>{data.NAME}</li>

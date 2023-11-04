@@ -22,3 +22,20 @@
 #search-input:focus {
   outline: none;
 }
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.update-div {
+  width: fit-content;
+  border-style: outset;
+  border-color: #9fd6ff;
+}
+
+#update-btn {
+  border: none;
+  background: white;
+  text-align: center;
+}
