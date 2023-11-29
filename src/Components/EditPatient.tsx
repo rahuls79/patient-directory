@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Form from "./SearchForm";
 import "./SearchPatient.css";
-import Select from "react-select";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import Dropdown from "react-bootstrap/Dropdown";
 // import Select from "react-select";
-import dayjs from "dayjs";
+
 import { SearchResultList } from "./SearchResultList";
-import {
-  isCustomEvent,
-  searchPatientProps,
-  Patient,
-  PatientDetails,
-} from "./types";
-import { pid } from "process";
+import { isCustomEvent, Patient, PatientDetails } from "./types";
 import EditForm from "./EditForm";
 
 const EditPatient = () => {

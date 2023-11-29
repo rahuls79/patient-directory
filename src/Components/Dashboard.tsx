@@ -8,7 +8,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import AddPatient from "./AddPatient";
-import { useRef, useContext } from "react";
+
 import SearchPatient from "./SearchPatient";
 import EditPatient from "./EditPatient";
 
